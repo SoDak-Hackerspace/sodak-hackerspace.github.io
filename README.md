@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Hello Friend NG
 
 ![Hello Friend NG](https://dsh.re/d914c)
@@ -211,3 +212,13 @@ If you like my work and if you think this project is worth to support it, just <
 Copyright © 2019-2021 Djordje Atlialp
 
 The theme is released under the MIT License. Check the [original theme license](https://github.com/rhazdon/hugo-theme-hello-friend-ng/blob/master/LICENSE.md) for additional licensing information.
+=======
+# Overview
+Welcome to the offical website of the SoDak Hackerspace! This repository holds the website for https://sodakhacker.space and is built by github actions. To get started contributing and adding your profile and projects to the space, simply clone the repository using the following command:
+
+`git clone --recurse-submodules <repo-url>`
+
+The `--recurse-submodules` flag is necessary for the submodule located at `themes/hello-friend-ng` so that the theming doesn't break at local testing. To spin up a local instance of the site and make changes, simply run the following command at the root of the repository:
+
+`hugo server` 
+>>>>>>> 57db2f765a4f59db7b6395f58cd725fb021aed4f
