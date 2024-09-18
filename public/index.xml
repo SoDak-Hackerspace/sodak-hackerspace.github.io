@@ -38,11 +38,11 @@
       <description></description>
     </item>
     <item>
-      <title>Blackelk Proxmox Server</title>
+      <title>Proxmox</title>
       <link>http://localhost:1313/projects/proxmox/</link>
       <pubDate>Sun, 23 Jun 2024 17:00:50 -0500</pubDate>
       <guid>http://localhost:1313/projects/proxmox/</guid>
-      <description>Overview Proxmox is a Debian based level 1 hypervisor which means it performs virtualization at the bare metal level rather than sitting on top of an existing OS. The fact that it&amp;rsquo;s Debian aligns well with one of the missions at the hackerspace to promote free and open source software whenever possible, and while you can pay for enterprise support you can also just roll with a free version and add 3rd party community repositories to bolster functionality and updates.</description>
+      <description>Overview Proxmox is a level 1 hypervisor which means it performs virtualization at the bare metal level rather than sitting on top of an existing OS. Proxmox is a Debian based KVM stack, which aligns well with one of the missions at the hackerspace to promote free and open source software, and while you can pay for enterprise support, you can also just roll with a free version and add 3rd party community repositories.</description>
     </item>
     <item>
       <title>About</title>
