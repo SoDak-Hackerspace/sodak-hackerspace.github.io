@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="trashpanda">
-<meta name="description" content="Level 1 Hypervisor For Virtual Server Deployment" />
+<meta name="description" content="Level 1 Hypervisor For Virtual Machine Deployment" />
 <meta name="keywords" content=", proxmox, virtualization" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -15,7 +15,7 @@
 
     <title>
         
-            Proxmox :: SoDak Hackerspace  — collaborate, learn, tinker
+            Blackelk Proxmox Server :: SoDak Hackerspace  — collaborate, learn, tinker
         
     </title>
 
@@ -37,25 +37,25 @@
 
 
 
-  <meta itemprop="name" content="Proxmox">
-  <meta itemprop="description" content="Level 1 Hypervisor For Virtual Server Deployment">
+  <meta itemprop="name" content="Blackelk Proxmox Server">
+  <meta itemprop="description" content="Level 1 Hypervisor For Virtual Machine Deployment">
   <meta itemprop="datePublished" content="2024-06-23T17:00:50-05:00">
   <meta itemprop="dateModified" content="2024-06-23T17:00:50-05:00">
-  <meta itemprop="wordCount" content="475">
+  <meta itemprop="wordCount" content="684">
   <meta itemprop="image" content="http://localhost:1313/">
   <meta itemprop="keywords" content="Proxmox,Virtualization">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/">
-  <meta name="twitter:title" content="Proxmox">
-  <meta name="twitter:description" content="Level 1 Hypervisor For Virtual Server Deployment">
+  <meta name="twitter:title" content="Blackelk Proxmox Server">
+  <meta name="twitter:description" content="Level 1 Hypervisor For Virtual Machine Deployment">
 
 
 
     <meta property="og:url" content="http://localhost:1313/projects/proxmox/">
   <meta property="og:site_name" content="SoDak Hackerspace">
-  <meta property="og:title" content="Proxmox">
-  <meta property="og:description" content="Level 1 Hypervisor For Virtual Server Deployment">
+  <meta property="og:title" content="Blackelk Proxmox Server">
+  <meta property="og:description" content="Level 1 Hypervisor For Virtual Machine Deployment">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="projects">
@@ -139,7 +139,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        3 minutes
+        4 minutes
 
         
       </p>
@@ -147,11 +147,11 @@
 
     <article>
       <h1 class="post-title">
-        <a href="http://localhost:1313/projects/proxmox/">Proxmox</a>
+        <a href="http://localhost:1313/projects/proxmox/">Blackelk Proxmox Server</a>
       </h1>
 
       
-        <div class="post-excerpt">Level 1 Hypervisor For Virtual Server Deployment</div>
+        <div class="post-excerpt">Level 1 Hypervisor For Virtual Machine Deployment</div>
       
 
       
@@ -160,7 +160,7 @@
 
       <div class="post-content">
         <h1 id="overview">Overview</h1>
-<p>Proxmox is a level 1 hypervisor which means it performs virtualization at the bare metal level rather than sitting on top of an existing OS. Proxmox is a Debian based KVM stack, which aligns well with one of the missions at the hackerspace to promote free and open source software, and while you can pay for enterprise support, you can also just roll with a free version and add 3rd party community repositories. <!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>Proxmox is a Debian based level 1 hypervisor which means it performs virtualization at the bare metal level rather than sitting on top of an existing OS. The fact that it&rsquo;s Debian aligns well with one of the missions at the hackerspace to promote free and open source software whenever possible, and while you can pay for enterprise support you can also just roll with a free version and add 3rd party community repositories to bolster functionality and updates. <!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>Some of the additional features of Proxmox include:</p>
 <ul>
 <li>Web UI for management of the server</li>
@@ -173,12 +173,15 @@
 </ul>
 <p>So now that I&rsquo;ve laid out the reasons for using Proxmox, let&rsquo;s talk about the specifics of what the installation at the hackerspace will look like.</p>
 <h2 id="hardware">Hardware</h2>
-<p>The hardware for our first Proxmox server will be an old HP EliteDesk 705 G4 DM. It&rsquo;s got a 4 Core AMD processor and currently 24GB of RAM. An odd configuration I know, but it&rsquo;s what I was able to pull out of the dumpster&hellip; literally. It&rsquo;ll be interesting to see how far this little machine will go. In my head I have a lot of plans for all the services that we could run and none are very CPU intensive. I honestly think we may hit a RAM limitation first, which would be an easy thing to upgrade before looking at either getting a beefier box or adding nodes to the Proxmox server and forming a cluster.</p>
+<p>The hardware for our first Proxmox server will be an old HP ZBook 15 G4 laptop with a 4 core, 8 thread i7-7700HQ processor and 32GB of DDR4 SODIMM RAM. As far as storage goes, it has 3 drive slots - two NVMe and one 2.5in SATA drive bay. It&rsquo;s also got a dedicated graphics card that we can use for a simple AI server or light 3D modeling workloads! Running a laptop as a server has quite a few benefits (especially when said laptop was free). It&rsquo;s got a built in crash cart and UPS, can be easier to upgrade, and is more power efficient than running a full fat tower or rack mount server. While there&rsquo;s certainly an upper limit on it&rsquo;s ability, I like this laptop as a starter server for the hackerspace.</p>
+<p>Interestingly enough, the hard drives I had on hand did not fit the M.2 slots that were on the laptop. I decided to use my 3D printer to print adapters for the M.2 slots which I thought was neat.</p>
+<p><img alt="3D Printed Drive Adapters" src="http://localhost:1313/projects/proxmox/drives.jpg"></p>
 <h2 id="installation-specifics">Installation Specifics</h2>
-<p>The server has an M.2 slot and a 2.5in harddrive slot so we&rsquo;ll populate the M.2 slot with a small boot drive and the 2.5in with a 1TB SSD for VM storage, backups, ISOs, containers, etc. The boot disk will be configured with ext4, so nothing fancy on that front, but I think BTRFS is a great option for the VM storage disk. It allows for snapshots, does integrity checks, and has served me well over the years. I know it&rsquo;s not best practice to have backups on the same disk as the data, so maybe that will get stored on the OS disk if room allows. There will most likely be a project in the future to configure a more robust backup strategy but for now we need to get off the ground.</p>
-<p>My policy on hypervisors is to keep them lean and clean so aside from the OS, I don&rsquo;t put much of anything else on them. That being said I do have a future project in mind to allow for remote access to the server using <a href="https://headscale.net/">Headscale</a> which is an open source, self-hosted <a href="https://tailscale.com/">Tailscale</a> solution. I think a good name for the first server in the SoDak Hackerspace is <code>blackelk.pve.sodakhacker.space</code>, after one of the most interesting South Dakotans, Nicholas Black Elk.</p>
+<p>The OS disk will be a 32GB SATA M.2 drive. Proxmox is <em>extremely</em> lightweight on it&rsquo;s install so 32GB is plenty. The other NVMe slot will be for VMs and containers since that will provide the most performance. The 2.5in SATA bay will host an SSD that can also be used for VMs and containers, but will primarily be for backups and ISOs. My policy on hypervisors is to keep them lean and mean so aside from the OS, I don&rsquo;t put much of anything else on them. That being said I do have a future project in mind to allow for remote access to the server using <a href="https://headscale.net/">Headscale</a> which is an open source, self-hosted <a href="https://tailscale.com/">Tailscale</a> implementation. I think a good name for the first server in the SoDak Hackerspace is <code>blackelk.pve.sodakhacker.space</code>, after one of the most interesting South Dakotans, Nicholas Black Elk.</p>
 <h2 id="post-installation-setup">Post Installation Setup</h2>
-<p>WIP</p>
+<p>Quite a few tweaks were made to the server post install. First I ran a script that configured the community repositories. That script can be found <a href="https://tteck.github.io/Proxmox/#proxmox-ve-post-install">here</a>. It also got rid of the annoying activation popup so that was nice. I enabled VLAN tagging on the NIC as well in order to have better seperation between networks. After that I configured the two non-OS drives to be single BTRFS drives so snapshots could be taken. That required editing <code>/etc/fstab</code> in order to have the disks mount at boot. If I ever have to reconfigure new drives, I&rsquo;ll need to remove those entries. I also configured backups to run every night at midnight on the SATA 2.5in drive. Next, I configured the server to enable GPU passthrough. <a href="https://www.reddit.com/r/Proxmox/comments/1f2f5zi/proxmoxenhancedconfigurationutility_pecu_automate/?share_id=r_qFqbAqEqjU0Jpq6LSpK&utm_content=2&utm_medium=android_app&utm_name=androidcss&utm_source=share&utm_term=20">A reddit post</a> was sent to me that walked through that, and there was a script you could run as well once the BIOS settings were worked out. Finally I modified the <code>/etc/systemd/logind.conf</code> to allow the laptop to be closed but still run. All I had to do was modify the <code>HandleLidSwitch</code> option to be <code>ignore</code>.</p>
+<p>And that was it! The hackerspace now has a working Hypervisor configured with some nice quality of life improvements! And of course, I needed to sticker bomb the latop. I am a security professional after all.</p>
+<p><img alt="Sticker Bomb laptop" src="http://localhost:1313/projects/proxmox/laptop_shell.jpg"></p>
 
       </div>
     </article>
@@ -212,7 +215,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        475 Words
+        684 Words
       </p>
 
       <p>
@@ -251,7 +254,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Proxmox&amp;caption=Proxmox&amp;canonicalUrl=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f" target="_blank" rel="noopener" aria-label="" title="Share on tumblr">
+<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Blackelk%20Proxmox%20Server&amp;caption=Blackelk%20Proxmox%20Server&amp;canonicalUrl=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f" target="_blank" rel="noopener" aria-label="" title="Share on tumblr">
   <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small">
     <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.374-4.156 1.404h-.178l.011.002z"/></svg>
@@ -260,7 +263,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="mailto:?subject=Proxmox&amp;body=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f" target="_self" rel="noopener" aria-label="" title="Share via email">
+<a class="resp-sharing-button__link" href="mailto:?subject=Blackelk%20Proxmox%20Server&amp;body=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f" target="_self" rel="noopener" aria-label="" title="Share via email">
   <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
     </div>
@@ -268,7 +271,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://pinterest.com/pin/create/button/?url=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f&amp;media=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f;description=Proxmox" target="_blank" rel="noopener" aria-label="" title="Share on pinterest">
+<a class="resp-sharing-button__link" href="https://pinterest.com/pin/create/button/?url=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f&amp;media=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f;description=Blackelk%20Proxmox%20Server" target="_blank" rel="noopener" aria-label="" title="Share on pinterest">
   <div class="resp-sharing-button resp-sharing-button--pinterest resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
     </div>
@@ -276,7 +279,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f&amp;title=Proxmox&amp;summary=Proxmox&amp;source=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f" target="_blank" rel="noopener" aria-label="" title="Share on linkedin">
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f&amp;title=Blackelk%20Proxmox%20Server&amp;summary=Blackelk%20Proxmox%20Server&amp;source=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f" target="_blank" rel="noopener" aria-label="" title="Share on linkedin">
   <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
     </div>
@@ -284,7 +287,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f&amp;resubmit=true&amp;title=Proxmox" target="_blank" rel="noopener" aria-label="" title="Share on reddit">
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f&amp;resubmit=true&amp;title=Blackelk%20Proxmox%20Server" target="_blank" rel="noopener" aria-label="" title="Share on reddit">
   <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
     </div>
@@ -292,7 +295,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://www.xing.com/app/user?op=share;url=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f;title=Proxmox" target="_blank" rel="noopener" aria-label="" title="Share on xing">
+<a class="resp-sharing-button__link" href="https://www.xing.com/app/user?op=share;url=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f;title=Blackelk%20Proxmox%20Server" target="_blank" rel="noopener" aria-label="" title="Share on xing">
   <div class="resp-sharing-button resp-sharing-button--xing resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/></svg>
     </div>
@@ -300,7 +303,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="whatsapp://send?text=Proxmox%20http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f" target="_blank" rel="noopener" aria-label="" title="Share on whatsapp">
+<a class="resp-sharing-button__link" href="whatsapp://send?text=Blackelk%20Proxmox%20Server%20http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f" target="_blank" rel="noopener" aria-label="" title="Share on whatsapp">
   <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </div>
@@ -308,7 +311,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f&amp;t=Proxmox" target="_blank" rel="noopener" aria-label="" title="Share on hacker news">
+<a class="resp-sharing-button__link" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f&amp;t=Blackelk%20Proxmox%20Server" target="_blank" rel="noopener" aria-label="" title="Share on hacker news">
   <div class="resp-sharing-button resp-sharing-button--hackernews resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 24V0h24v24H0zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896h-1.88z"/></svg>
     </div>
@@ -316,7 +319,7 @@
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Proxmox&amp;url=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f" target="_blank" rel="noopener" aria-label="" title="Share on telegram">
+<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Blackelk%20Proxmox%20Server&amp;url=http%3a%2f%2flocalhost%3a1313%2fprojects%2fproxmox%2f" target="_blank" rel="noopener" aria-label="" title="Share on telegram">
   <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
     </div>

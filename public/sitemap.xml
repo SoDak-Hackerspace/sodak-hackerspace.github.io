@@ -17,6 +17,9 @@
     <loc>http://localhost:1313/projects/ipa/</loc>
     <lastmod>2024-06-23T17:00:58-05:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/projects/proxmox/</loc>
+    <lastmod>2024-06-23T17:00:50-05:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/categories/</loc>
     <lastmod>2024-06-23T17:00:50-05:00</lastmod>
   </url><url>
@@ -24,9 +27,6 @@
     <lastmod>2024-06-23T17:00:50-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/proxmox/</loc>
-    <lastmod>2024-06-23T17:00:50-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/proxmox/</loc>
     <lastmod>2024-06-23T17:00:50-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
