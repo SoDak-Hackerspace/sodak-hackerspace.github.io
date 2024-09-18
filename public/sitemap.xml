@@ -2,13 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/members/austin/</loc>
-    <lastmod>2024-06-26T12:22:45-05:00</lastmod>
+    <loc>http://localhost:1313/projects/matrix/</loc>
+    <lastmod>2024-06-23T17:01:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2024-06-26T12:22:45-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/matrix/</loc>
     <lastmod>2024-06-23T17:01:24-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/projects/authentik/</loc>
@@ -20,6 +17,9 @@
     <loc>http://localhost:1313/projects/ipa/</loc>
     <lastmod>2024-06-23T17:00:58-05:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/projects/proxmox/</loc>
+    <lastmod>2024-06-23T17:00:50-05:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/categories/</loc>
     <lastmod>2024-06-23T17:00:50-05:00</lastmod>
   </url><url>
@@ -27,9 +27,6 @@
     <lastmod>2024-06-23T17:00:50-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/proxmox/</loc>
-    <lastmod>2024-06-23T17:00:50-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/projects/proxmox/</loc>
     <lastmod>2024-06-23T17:00:50-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>

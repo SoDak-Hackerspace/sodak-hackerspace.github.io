@@ -7,15 +7,8 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 26 Jun 2024 12:22:45 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 23 Jun 2024 17:01:24 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Austin</title>
-      <link>http://localhost:1313/members/austin/</link>
-      <pubDate>Wed, 26 Jun 2024 12:22:45 -0500</pubDate>
-      <guid>http://localhost:1313/members/austin/</guid>
-      <description></description>
-    </item>
     <item>
       <title>Matrix</title>
       <link>http://localhost:1313/projects/matrix/</link>
@@ -45,11 +38,11 @@
       <description></description>
     </item>
     <item>
-      <title>Proxmox</title>
+      <title>Blackelk Proxmox Server</title>
       <link>http://localhost:1313/projects/proxmox/</link>
       <pubDate>Sun, 23 Jun 2024 17:00:50 -0500</pubDate>
       <guid>http://localhost:1313/projects/proxmox/</guid>
-      <description>Overview Proxmox is a level 1 hypervisor which means it performs virtualization at the bare metal level rather than sitting on top of an existing OS. Proxmox is a Debian based KVM stack, which aligns well with one of the missions at the hackerspace to promote free and open source software, and while you can pay for enterprise support, you can also just roll with a free version and add 3rd party community repositories.</description>
+      <description>Overview Proxmox is a Debian based level 1 hypervisor which means it performs virtualization at the bare metal level rather than sitting on top of an existing OS. The fact that it&amp;rsquo;s Debian aligns well with one of the missions at the hackerspace to promote free and open source software whenever possible, and while you can pay for enterprise support you can also just roll with a free version and add 3rd party community repositories to bolster functionality and updates.</description>
     </item>
     <item>
       <title>About</title>
