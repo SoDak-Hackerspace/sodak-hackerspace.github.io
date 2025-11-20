@@ -7,7 +7,7 @@ socials:
  - name: "github"
    url: "https://github.com/mcculleytech"
  - name: "ghost"
-   url: "https://blog.mcculley.tech"
+   url: "https://mcculley.tech"
 ---
 
 Hello! My name is alex. I'm a security professional with a special interest in offensive security, Linux systems, automations, and infrastructure as code (IaC). In addition to those primary interests, I have a desire to learn more about AI, game development, cloud infrastructure, hardware hacking, and the BSD operating system.<br><br>

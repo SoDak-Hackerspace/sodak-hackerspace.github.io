@@ -7,56 +7,35 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 23 Jun 2024 17:01:24 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 20 Nov 2025 13:04:14 -0600</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Matrix</title>
-      <link>http://localhost:1313/projects/matrix/</link>
-      <pubDate>Sun, 23 Jun 2024 17:01:24 -0500</pubDate>
-      <guid>http://localhost:1313/projects/matrix/</guid>
-      <description></description>
+      <title>Building a Virtual Machine Template</title>
+      <link>http://localhost:1313/projects/vm-template/</link>
+      <pubDate>Thu, 20 Nov 2025 13:04:14 -0600</pubDate>
+      <guid>http://localhost:1313/projects/vm-template/</guid>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;&#xA;&lt;p&gt;Deploying a VM template for our Proxmox server is a good idea for many little reasons including: installing tools, disabling unnecessary services, configuration of default services, speed of deployment, and the list goes on and on. All of these reasons can really be summed up in one overarching reason and that&amp;rsquo;s minimizing configuration drift. Having a baseline template reduces the time spent on troubleshooting installations and makes it easier to configure automation tooling like Ansible in the future. In this post, I&amp;rsquo;ll give a little bit of a detailed walkthrough for how I like to setup a Debian template. I&amp;rsquo;ll make a few more, most notably Rocky Linux to have a RHEL flavor in our environment which will be important for the &lt;a href=&#34;../ipa/index.md&#34;&gt;FreeIPA&lt;/a&gt; project. But I&amp;rsquo;ll choose Debian because it will be the defacto distribution of choice.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Authentik</title>
-      <link>http://localhost:1313/projects/authentik/</link>
-      <pubDate>Sun, 23 Jun 2024 17:01:16 -0500</pubDate>
-      <guid>http://localhost:1313/projects/authentik/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>VM Templates</title>
-      <link>http://localhost:1313/projects/vm-templates/</link>
-      <pubDate>Sun, 23 Jun 2024 17:01:04 -0500</pubDate>
-      <guid>http://localhost:1313/projects/vm-templates/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>FreeIPA</title>
-      <link>http://localhost:1313/projects/ipa/</link>
-      <pubDate>Sun, 23 Jun 2024 17:00:58 -0500</pubDate>
-      <guid>http://localhost:1313/projects/ipa/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Proxmox</title>
+      <title>Blackelk Proxmox Server</title>
       <link>http://localhost:1313/projects/proxmox/</link>
       <pubDate>Sun, 23 Jun 2024 17:00:50 -0500</pubDate>
       <guid>http://localhost:1313/projects/proxmox/</guid>
-      <description>Overview Proxmox is a level 1 hypervisor which means it performs virtualization at the bare metal level rather than sitting on top of an existing OS. Proxmox is a Debian based KVM stack, which aligns well with one of the missions at the hackerspace to promote free and open source software, and while you can pay for enterprise support, you can also just roll with a free version and add 3rd party community repositories.</description>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;&#xA;&lt;p&gt;Proxmox is a Debian based level 1 hypervisor which means it performs virtualization at the bare metal level rather than sitting on top of an existing OS. The fact that it&amp;rsquo;s Debian aligns well with one of the missions at the hackerspace to promote free and open source software whenever possible, and while you can pay for enterprise support you can also just roll with a free version and add 3rd party community repositories to bolster functionality and updates. &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>About</title>
       <link>http://localhost:1313/about/</link>
       <pubDate>Fri, 21 Jun 2024 14:09:35 -0500</pubDate>
       <guid>http://localhost:1313/about/</guid>
-      <description>Mission Statement our mission at the SoDak Hackerspace is to create an environment where innovation, collaboration, and curiosity thrive. Hackers, makers, and tinkerers of all skill levels are welcome to come and learn, share knowledge, and turn ideas into reality. Our hackerspace strives to provide:&#xA;Learning and Collaboration Opportunities Supporting Innovation Building Community Advancing FOSS Software and Hardware </description>
+      <description>&lt;h2 id=&#34;mission-statement&#34;&gt;Mission Statement&lt;/h2&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;our mission at the SoDak Hackerspace is to create an environment where innovation, collaboration, and curiosity thrive. Hackers, makers, and tinkerers of all skill levels are welcome to come and learn, share knowledge, and turn ideas into reality. Our hackerspace strives to provide:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Learning and Collaboration Opportunities&lt;/li&gt;&#xA;&lt;li&gt;Supporting Innovation&lt;/li&gt;&#xA;&lt;li&gt;Building Community&lt;/li&gt;&#xA;&lt;li&gt;Advancing FOSS Software and Hardware&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>trashpanda</title>
       <link>http://localhost:1313/members/trashpanda/</link>
       <pubDate>Fri, 21 Jun 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/members/trashpanda/</guid>
-      <description>Hello! My name is alex. I&amp;rsquo;m a security professional with a special interest in offensive security, Linux systems, automations, and infrastructure as code (IaC). In addition to those primary interests, I have a desire to learn more about AI, game development, cloud infrastructure, hardware hacking, and the BSD operating system.&#xA;If you&amp;rsquo;re interested in what I&amp;rsquo;m working on outside of the hackerspace, I do have a personal website where I write on what I&amp;rsquo;m studying and working on in my homelab.</description>
+      <description>&lt;p&gt;Hello! My name is alex. I&amp;rsquo;m a security professional with a special interest in offensive security, Linux systems, automations, and infrastructure as code (IaC). In addition to those primary interests, I have a desire to learn more about AI, game development, cloud infrastructure, hardware hacking, and the BSD operating system.&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re interested in what I&amp;rsquo;m working on outside of the hackerspace, I do have a personal website where I write on what I&amp;rsquo;m studying and working on in my homelab. You can find that link below as well as my personal GitHub.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

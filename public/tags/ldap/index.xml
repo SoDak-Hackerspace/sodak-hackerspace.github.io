@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ldap on SoDak Hackerspace</title>
+    <link>http://localhost:1313/tags/ldap/</link>
+    <description>Recent content in Ldap on SoDak Hackerspace</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 23 Jun 2024 17:00:58 -0500</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ldap/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FreeIPA</title>
+      <link>http://localhost:1313/projects/ipa/</link>
+      <pubDate>Sun, 23 Jun 2024 17:00:58 -0500</pubDate>
+      <guid>http://localhost:1313/projects/ipa/</guid>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;overview&lt;/h1&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://www.freeipa.org/&#34;&gt;FreeIPA&lt;/a&gt; project allows for managment of Linux users and hosts from one central location (per their website). As an organization built on Linux users and hosts, this is an obvious choice for use to deploy in our environment. It allows us not only to manage users and hosts, but configure SSO on applications. [insert-and-there was much rejoycing]. One of the more interesting features that we won&amp;rsquo;t use is the ability of FreeIPA to integrate with Active Directory offering a way to integrate a windows corporate environment with a unix based one. Very useful if your organization has a decent sized Linux footprint.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

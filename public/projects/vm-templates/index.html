@@ -41,6 +41,7 @@
   <meta itemprop="description" content="Because Everyone Needs to Deploy Servers Quickly, Right?">
   <meta itemprop="datePublished" content="2024-06-23T17:01:04-05:00">
   <meta itemprop="dateModified" content="2024-06-23T17:01:04-05:00">
+  <meta itemprop="wordCount" content="1295">
   <meta itemprop="image" content="http://localhost:1313/">
 
   <meta name="twitter:card" content="summary_large_image">
@@ -133,7 +134,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        0 minutes
+        7 minutes
 
         
       </p>
@@ -153,7 +154,284 @@
       
 
       <div class="post-content">
-        
+        <h1 id="overview">Overview</h1>
+<p>Deploying a VM template for our Proxmox server is a good idea for many little reasons including: installing tools, disabling unnecessary services, configuration of default services, speed of deployment, and the list goes on and on. All of these reasons can really be summed up in one overarching reason and that&rsquo;s minimizing configuration drift. Having a baseline template reduces the time spent on troubleshooting installations and makes it easier to configure automation tooling like Ansible in the future. In this post, I&rsquo;ll give a little bit of a detailed walkthrough for how I like to setup a Debian template. I&rsquo;ll make a few more, most notably Rocky Linux to have a RHEL flavor in our environment which will be important for the <a href="http://localhost:1313/projects/ipa/">FreeIPA</a> project. But I&rsquo;ll choose Debian because it will be the defacto distribution of choice.</p>
+<h2 id="quick-specs">Quick Specs</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Field</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>OS</td>
+          <td>Debian 13</td>
+      </tr>
+      <tr>
+          <td>RAM</td>
+          <td>2G</td>
+      </tr>
+      <tr>
+          <td>CPU</td>
+          <td>2 Cores</td>
+      </tr>
+      <tr>
+          <td>Storage</td>
+          <td>32GB</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="lvm-and-disk-setup">LVM and Disk Setup</h2>
+<p>Since we&rsquo;re using BIOS and not UEFI, we&rsquo;ll first create a 1GB parition for <code>/boot</code>. This should be more than enough space for storing kernel images and grub.</p>
+<p>I like to use <a href="https://wiki.archlinux.org/title/LVM">LVM</a> (Logical Volume Management) to manage storage on my servers it allows for expanding the disk in a way that&rsquo;s cleaner than traditional partitions. You can split LVM into three levels: Physical Volume (PV), Volume Group (VG), and Logical Volumes (LV). Basically LVM abstracts away storage and allows for creating a PV from a disk, then adding that PV to a VG, and expanding any of the LVs within the VG with that new disk storage. It&rsquo;s confusing at first, but this image has helped me understand what&rsquo;s happening under the hood:</p>
+
+  <img
+    src="./LVM.png"
+     alt="LVM explained" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<table>
+  <thead>
+      <tr>
+          <th>Volume Group</th>
+          <th>Logical Volume</th>
+          <th>Initial Size</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rootVG</td>
+          <td>rootLV</td>
+          <td>5G</td>
+      </tr>
+      <tr>
+          <td>rootVG</td>
+          <td>optLV</td>
+          <td>3G</td>
+      </tr>
+      <tr>
+          <td>rootVG</td>
+          <td>tmpLV</td>
+          <td>2G</td>
+      </tr>
+      <tr>
+          <td>rootVG</td>
+          <td>usrLV</td>
+          <td>5G</td>
+      </tr>
+      <tr>
+          <td>rootVG</td>
+          <td>varLV</td>
+          <td>6G</td>
+      </tr>
+      <tr>
+          <td>rootVG</td>
+          <td>varlogLV</td>
+          <td>3G</td>
+      </tr>
+      <tr>
+          <td>rootVG</td>
+          <td>homeLV</td>
+          <td>3G</td>
+      </tr>
+      <tr>
+          <td>rootVG</td>
+          <td>swapLV</td>
+          <td>4G</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="installation">Installation</h2>
+<p>With our Debian ISO downloaded and VM provisioned through Proxmox, we can start the installation. While I&rsquo;m sure that there&rsquo;s a way to get the disk setup in the graphical installation for Proxmox, I prefer the TUI install. I think it&rsquo;s actually easier to see the disk setup portion in that view. I&rsquo;ll skip the boilerplate stuff and get to the interesting part of the installation.</p>
+<p>Here&rsquo;s the initial disk partition setup:</p>
+
+  <img
+    src="./partition_disks0.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<p>We&rsquo;ll create a new partition of size 1GB and mount it at <code>/boot</code>. It&rsquo;ll be a primary although that doesn&rsquo;t necessarily matter. We&rsquo;ll place it at the beginning of the partition table and set the bootable flag on. We&rsquo;ll use EXT4 as the default filesystem.</p>
+
+  <img
+    src="./partition_disks1.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<p>Next we&rsquo;ll create a new partition like before but we&rsquo;ll set that partition to the maximum size and <em>not set a mount point</em> in order to create a Physical Volume. With that out of the way, we&rsquo;ll select <code>Configure the Logicial Volume Manager</code> from the main partition disks menu.</p>
+
+  <img
+    src="./partition_disks2.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<p>We&rsquo;ll have to write the current partitions to the disk before entering into LVM Configuration Manager. Once that&rsquo;s done, we&rsquo;ll select <code>Create Volume Group</code> and name it <code>rootVG</code> and select the partition we just made.</p>
+
+  <img
+    src="./partition_disks3.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<p>We&rsquo;ll write those changes to disk and from here on out we&rsquo;ll work in the LVM Configuration Menu. With our Volume Group created, we can move on to configuring our Logical Volumes. We&rsquo;ll create a new logical volume, name it <code>rootLV</code> and give it a size of 5G as per our table above.</p>
+<p>
+  <img
+    src="./partition_disks4.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<!-- raw HTML omitted --></p>
+<p>
+  <img
+    src="./partition_disks5.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<!-- raw HTML omitted --></p>
+<p>
+  <img
+    src="./partition_disks6.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<!-- raw HTML omitted --></p>
+<p>We then repeat this process for each of our LVs listed in our table. Once this is done, we can finish writing the changes to the disk and are dumped out to the main menu of the partition disks menu. With our logical volumes made, we can move on to providing mount points for the newly created LVs. You can select each LV, under the <code>use as</code> select <code>EXT4</code> and then mount at the appropriate location. The only difference is the <code>swapLV</code>, which you&rsquo;ll need to select <code>swap</code> under <code>use as</code>:</p>
+<p>
+  <img
+    src="./partition_disks8.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<!-- raw HTML omitted --></p>
+
+  <img
+    src="./partition_disks9.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<p>Repeat this process for each of our LVs. With all of that done, we can then write the changes to the disk and move forward.</p>
+
+  <img
+    src="./partition_disks10.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<p>The installation resumes with just basically clicking through the defaults. The only thing we need is to ensure that we have ssh server installed on the box when the menu presents itself. It&rsquo;s selected by default along with system utilities so we&rsquo;ll just leave that alone. Finally, we&rsquo;ll ensure the GRUB boot loader is installed on right disk. Should be the only option available.</p>
+
+  <img
+    src="./grub.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<p>Once all that&rsquo;s done, we&rsquo;ll reboot and login to our debian template server to setup a few things.</p>
+<h2 id="post-installation">Post Installation</h2>
+<p>Post install there&rsquo;s a few initial things I want to configure on the template including installing packages, disabling ssh password auth, and making a systemd unit to handle the first boot of a newly deployed template. This gives the host new ssh host keys to avoid annoying ssh duplicated keys and security warnings when logging in via SSH. The packages that I want to install are just <code>vim</code>, <code>sudo</code>, <code>tmux</code>, and <code>git</code>. This will suffice for now and we can always go back and tweak this template if needed. It&rsquo;s also good practice to login and update the template every couple of months or so. Here&rsquo;s the package installation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>su -
+</span></span><span style="display:flex;"><span>apt update
+</span></span><span style="display:flex;"><span>apt install vim sudo git tmux
+</span></span><span style="display:flex;"><span>usermod -aG sudo &lt;user&gt;
+</span></span></code></pre></div><p>These commands login as root, update the package cache, installs the packages, and adds the local user to the <code>sudo</code> group.</p>
+<p>With that out of the way, we&rsquo;ll move on to modifying the SSH config to remove password access. This way key authentication is the only way to access the server remotely. This is a huge security step in my opinion and not implemented enough. If you want to place a key on a server, you can generate a key with <code>ssh-keygen -t ed25519</code> and then copy it over with <code>ssh-copy-id user@ip</code>.</p>
+
+  <img
+    src="./grub.png"
+     alt="partition start screen" 
+    class="center"
+     style="display: block; margin-left: auto; margin-right: auto;" 
+  />
+
+
+<p>Now we can move onto the scripts that will live on the server. The first script we&rsquo;ll drop will be the <code>first-boot.sh</code> script which handles the machine ssh key generation when the vm is deployed from template. I throw this script in the <code>/root/scripts/first-boot.sh</code> location and then configure systemd to run it once on boot. The script checks if a file exists in the <code>/etc/ssh</code> directory and if it does then it exits without doing anything. Otherwise it creates that file and creates new keys.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>flag<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/etc/ssh/new_keys&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> ! -f <span style="color:#e6db74">&#34;</span>$flag<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>  touch /etc/ssh/new_keys
+</span></span><span style="display:flex;"><span>  rm -v /etc/ssh/ssh_host_*
+</span></span><span style="display:flex;"><span>  ssh-keygen -A
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>  :
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>exit <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>The <code>systemd</code> unit file looks as such:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-systemd" data-lang="systemd"><span style="display:flex;"><span><span style="color:#66d9ef">[Unit]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Description</span><span style="color:#f92672">=</span><span style="color:#e6db74">Run first-boot script to generate new SSH host keys</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Before</span><span style="color:#f92672">=</span><span style="color:#e6db74">ssh.service</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[Service]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Type</span><span style="color:#f92672">=</span><span style="color:#e6db74">oneshot</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ExecStart</span><span style="color:#f92672">=</span><span style="color:#e6db74">/root/scripts/first-boot.sh</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">RemainAfterExit</span><span style="color:#f92672">=</span><span style="color:#e6db74">yes</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[Install]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">WantedBy</span><span style="color:#f92672">=</span><span style="color:#e6db74">multi-user.target</span>
+</span></span></code></pre></div><p>Finally we can configure the cleanup script for the template located in <code>/root/scripts/template-cleanup.sh</code>. This should be run as the last thing before shutting down the server and converting to template. It will remove the ssh keys and cleanup logs and history files:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt update
+</span></span><span style="display:flex;"><span>apt upgrade
+</span></span><span style="display:flex;"><span>apt autoremove
+</span></span><span style="display:flex;"><span>apt clean
+</span></span><span style="display:flex;"><span>truncate -s <span style="color:#ae81ff">0</span> /etc/machine-id
+</span></span><span style="display:flex;"><span>truncate -s <span style="color:#ae81ff">0</span> /var/lib/dbus/machine-id
+</span></span><span style="display:flex;"><span>rm -v /etc/ssh/ssh_host_*
+</span></span><span style="display:flex;"><span>truncate -s <span style="color:#ae81ff">0</span> /var/log/syslog
+</span></span><span style="display:flex;"><span>truncate -s <span style="color:#ae81ff">0</span> /var/log/auth.log
+</span></span><span style="display:flex;"><span>rm -rf /tmp/*
+</span></span><span style="display:flex;"><span>rm -rf /var/tmp/*
+</span></span><span style="display:flex;"><span>truncate -s <span style="color:#ae81ff">0</span> ~/.bash_history
+</span></span><span style="display:flex;"><span>truncate -s <span style="color:#ae81ff">0</span> /home/&lt;user&gt;/.bash_history
+</span></span></code></pre></div><p>And that should be it! We now have a Debian 13 template that we can use to quickly deploy servers with LVM for easier, cleaner, and simpler disk management. There is a checklist of things you should do when you deploy from a template like this including;</p>
+<ul>
+<li>Change the hostname</li>
+<li>Set a static IP or reserve a DHCP lease (cleaner)</li>
+<li>Change password for user and root</li>
+</ul>
+<p>The update process for the template, at least in Proxmox, looks like:</p>
+<ul>
+<li>Deploy from template</li>
+<li>Make changes</li>
+<li>Run <code>/root/scripts/template-cleanup.sh</code></li>
+<li>Convert new VM to template</li>
+<li>Delete old template</li>
+</ul>
+<p>Thanks for reading and I hope you learned something!</p>
+
       </div>
     </article>
 
@@ -171,7 +449,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        0 Words
+        1295 Words
       </p>
 
       <p>
@@ -349,7 +627,7 @@
 
 
 
-<script type="text/javascript" src="http://localhost:1313/bundle.min.e89fda0f29b95d33f6f4224dd9e5cf69d84aff3818be2b0d73e731689cc374261b016d17d46f8381962fb4a1577ba3017b1f23509d894f6e66431f988c00889e.js" integrity="sha512-6J/aDym5XTP29CJN2eXPadhK/zgYvisNc&#43;cxaJzDdCYbAW0X1G&#43;DgZYvtKFXe6MBex8jUJ2JT25mQx&#43;YjACIng=="></script>
+<script type="text/javascript" src="http://localhost:1313/bundle.min.ad54ad97364f77ede35def9096b162bb1f0b3973aa50b080f5e82fa147f6882e2a7200d7535adbf9b51bebf939f1c1ca9bbe6be87530092aca720eac4a226fda.js" integrity="sha512-rVStlzZPd&#43;3jXe&#43;QlrFiux8LOXOqULCA9egvoUf2iC4qcgDXU1rb&#43;bUb6/k58cHKm75r6HUwCSrKcg6sSiJv2g=="></script>
 
 
 

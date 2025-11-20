@@ -7,42 +7,21 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 23 Jun 2024 17:01:24 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 20 Nov 2025 13:04:14 -0600</lastBuildDate>
     <atom:link href="http://localhost:1313/projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Matrix</title>
-      <link>http://localhost:1313/projects/matrix/</link>
-      <pubDate>Sun, 23 Jun 2024 17:01:24 -0500</pubDate>
-      <guid>http://localhost:1313/projects/matrix/</guid>
-      <description></description>
+      <title>Building a Virtual Machine Template</title>
+      <link>http://localhost:1313/projects/vm-template/</link>
+      <pubDate>Thu, 20 Nov 2025 13:04:14 -0600</pubDate>
+      <guid>http://localhost:1313/projects/vm-template/</guid>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;&#xA;&lt;p&gt;Deploying a VM template for our Proxmox server is a good idea for many little reasons including: installing tools, disabling unnecessary services, configuration of default services, speed of deployment, and the list goes on and on. All of these reasons can really be summed up in one overarching reason and that&amp;rsquo;s minimizing configuration drift. Having a baseline template reduces the time spent on troubleshooting installations and makes it easier to configure automation tooling like Ansible in the future. In this post, I&amp;rsquo;ll give a little bit of a detailed walkthrough for how I like to setup a Debian template. I&amp;rsquo;ll make a few more, most notably Rocky Linux to have a RHEL flavor in our environment which will be important for the &lt;a href=&#34;../ipa/index.md&#34;&gt;FreeIPA&lt;/a&gt; project. But I&amp;rsquo;ll choose Debian because it will be the defacto distribution of choice.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Authentik</title>
-      <link>http://localhost:1313/projects/authentik/</link>
-      <pubDate>Sun, 23 Jun 2024 17:01:16 -0500</pubDate>
-      <guid>http://localhost:1313/projects/authentik/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>VM Templates</title>
-      <link>http://localhost:1313/projects/vm-templates/</link>
-      <pubDate>Sun, 23 Jun 2024 17:01:04 -0500</pubDate>
-      <guid>http://localhost:1313/projects/vm-templates/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>FreeIPA</title>
-      <link>http://localhost:1313/projects/ipa/</link>
-      <pubDate>Sun, 23 Jun 2024 17:00:58 -0500</pubDate>
-      <guid>http://localhost:1313/projects/ipa/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Proxmox</title>
+      <title>Blackelk Proxmox Server</title>
       <link>http://localhost:1313/projects/proxmox/</link>
       <pubDate>Sun, 23 Jun 2024 17:00:50 -0500</pubDate>
       <guid>http://localhost:1313/projects/proxmox/</guid>
-      <description>Overview Proxmox is a level 1 hypervisor which means it performs virtualization at the bare metal level rather than sitting on top of an existing OS. Proxmox is a Debian based KVM stack, which aligns well with one of the missions at the hackerspace to promote free and open source software, and while you can pay for enterprise support, you can also just roll with a free version and add 3rd party community repositories.</description>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;&#xA;&lt;p&gt;Proxmox is a Debian based level 1 hypervisor which means it performs virtualization at the bare metal level rather than sitting on top of an existing OS. The fact that it&amp;rsquo;s Debian aligns well with one of the missions at the hackerspace to promote free and open source software whenever possible, and while you can pay for enterprise support you can also just roll with a free version and add 3rd party community repositories to bolster functionality and updates. &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
