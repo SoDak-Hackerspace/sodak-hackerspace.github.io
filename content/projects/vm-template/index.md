@@ -7,7 +7,7 @@ images: ["./debian.png"]
 ---
 # Overview
 
-Deploying a VM template for our Proxmox server is a good idea for many little reasons including: installing tools, disabling unnecessary services, configuration of default services, speed of deployment, and the list goes on and on. All of these reasons can really be summed up in one overarching reason and that's minimizing configuration drift. Having a baseline template reduces the time spent on troubleshooting installations and makes it easier to configure automation tooling like Ansible in the future. In this post, I'll give a little bit of a detailed walkthrough for how I like to setup a Debian template. I'll make a few more, most notably Rocky Linux to have a RHEL flavor in our environment which will be important for the [FreeIPA](../ipa/index.md) project. But I'll choose Debian because it will be the defacto distribution of choice.
+Creating a VM template for our Proxmox server is a good idea for many reasons including: installing tools, disabling unnecessary services, configuration of default services, speed of deployment, etc. The list goes on and on. All of these reasons can really be summed up in one overarching reason and that's minimizing configuration drift. Having a baseline template reduces the time spent on troubleshooting and makes it easier to configure automation tooling like Ansible in the future. In this post, I'll give a little bit of a detailed walkthrough for how I like to setup a Debian template. I'll make a few more templates as well, most notably Rocky Linux to have a RHEL flavor in our environment which will be important for the FreeIPA project. But I'll choose Debian because it will be the defacto distribution of choice for the hackerspace.
 
 ## Quick Specs
 
@@ -103,7 +103,7 @@ These commands login as root, update the package cache, installs the packages, a
 
 With that out of the way, we'll move on to modifying the SSH config to remove password access. This way key authentication is the only way to access the server remotely. This is a huge security step in my opinion and not implemented enough. If you want to place a key on a server, you can generate a key with `ssh-keygen -t ed25519` and then copy it over with `ssh-copy-id user@ip`.
 
-{{< image src="./grub.png" alt="partition start screen" >}}
+{{< image src="./ssh_config.png" alt="partition start screen" >}}
 
 Now we can move onto the scripts that will live on the server. The first script we'll drop will be the `first-boot.sh` script which handles the machine ssh key generation when the vm is deployed from template. I throw this script in the `/root/scripts/first-boot.sh` location and then configure systemd to run it once on boot. The script checks if a file exists in the `/etc/ssh` directory and if it does then it exits without doing anything. Otherwise it creates that file and creates new keys.
 
