@@ -7,14 +7,21 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 20 Nov 2025 13:04:14 -0600</lastBuildDate>
+    <lastBuildDate>Mon, 08 Dec 2025 21:35:59 -0600</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Headscale</title>
+      <link>http://localhost:1313/projects/headscale/</link>
+      <pubDate>Mon, 08 Dec 2025 21:35:59 -0600</pubDate>
+      <guid>http://localhost:1313/projects/headscale/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://headscale.net/stable/&#34;&gt;Headscale&lt;/a&gt; is the open source, self-hosted implementation of &lt;a href=&#34;https://tailscale.com/&#34;&gt;Tailscale&amp;rsquo;s&lt;/a&gt; control node. It lets users take advantage of the tailscale client - available on all platforms - and create a mesh network. One of the major advantages of using headscale (and tailscale) is the subnet router and exit node feature. The subnet routing grants access to machines on the same subnet as the connected client. The exit node feature allows us to route traffic through a given node like a traditional VPN. Overall it&amp;rsquo;s one of the best self-hosting technologies, and the clear choice for remote access to the hackerspace network.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Building a Virtual Machine Template</title>
       <link>http://localhost:1313/projects/vm-template/</link>
       <pubDate>Thu, 20 Nov 2025 13:04:14 -0600</pubDate>
       <guid>http://localhost:1313/projects/vm-template/</guid>
-      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;&#xA;&lt;p&gt;Deploying a VM template for our Proxmox server is a good idea for many little reasons including: installing tools, disabling unnecessary services, configuration of default services, speed of deployment, and the list goes on and on. All of these reasons can really be summed up in one overarching reason and that&amp;rsquo;s minimizing configuration drift. Having a baseline template reduces the time spent on troubleshooting installations and makes it easier to configure automation tooling like Ansible in the future. In this post, I&amp;rsquo;ll give a little bit of a detailed walkthrough for how I like to setup a Debian template. I&amp;rsquo;ll make a few more, most notably Rocky Linux to have a RHEL flavor in our environment which will be important for the &lt;a href=&#34;../ipa/index.md&#34;&gt;FreeIPA&lt;/a&gt; project. But I&amp;rsquo;ll choose Debian because it will be the defacto distribution of choice.&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;&#xA;&lt;p&gt;Creating a VM template for our Proxmox server is a good idea for many reasons including: installing tools, disabling unnecessary services, configuration of default services, speed of deployment, etc. The list goes on and on. All of these reasons can really be summed up in one overarching reason and that&amp;rsquo;s minimizing configuration drift. Having a baseline template reduces the time spent on troubleshooting and makes it easier to configure automation tooling like Ansible in the future. In this post, I&amp;rsquo;ll give a little bit of a detailed walkthrough for how I like to setup a Debian template. I&amp;rsquo;ll make a few more templates as well, most notably Rocky Linux to have a RHEL flavor in our environment which will be important for the FreeIPA project. But I&amp;rsquo;ll choose Debian because it will be the defacto distribution of choice for the hackerspace.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Blackelk Proxmox Server</title>

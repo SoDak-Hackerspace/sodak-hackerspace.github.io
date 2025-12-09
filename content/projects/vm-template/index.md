@@ -1,9 +1,13 @@
 ---
 title: "Building a Virtual Machine Template"
+author: "trashpana"
 date: 2025-11-20T13:04:14-06:00
 draft: false
 comments: false
+description: "For Faster VM Deployment"
 images: ["./debian.png"]
+tags: ["debian","virtualization"]
+categories: ["infrastructure"]
 ---
 # Overview
 
@@ -137,6 +141,8 @@ RemainAfterExit=yes
 [Install]
 WantedBy=multi-user.target
 ```
+
+With the `systemd` unit file created, we can enable the service with `systemctl enable first-boot.service`.
 
 Finally we can configure the cleanup script for the template located in `/root/scripts/template-cleanup.sh`. This should be run as the last thing before shutting down the server and converting to template. It will remove the ssh keys and cleanup logs and history files:
 

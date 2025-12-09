@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="trashpanda">
-<meta name="description" content="Self Hosted Peer-to-Peer VPN" />
-<meta name="keywords" content=", vpn, networking, reverse proxy" />
+<meta name="description" content="Headscale is the open source, self-hosted implementation of Tailscale&rsquo;s control node. It lets users take advantage of the tailscale client - available on all platforms - and create a mesh network. One of the major advantages of using headscale (and tailscale) is the subnet router and exit node feature. The subnet routing grants access to machines on the same subnet as the connected client. The exit node feature allows us to route traffic through a given node like a traditional VPN. Overall it&rsquo;s one of the best self-hosting technologies, and the clear choice for remote access to the hackerspace network.
+" />
+<meta name="keywords" content=", vpn, headscale" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
 <link rel="canonical" href="http://localhost:1313/projects/headscale/" />
@@ -38,43 +39,41 @@
 
 
   <meta itemprop="name" content="Headscale">
-  <meta itemprop="description" content="Self Hosted Peer-to-Peer VPN">
-  <meta itemprop="datePublished" content="2024-09-18T13:14:43-05:00">
-  <meta itemprop="dateModified" content="2024-09-18T13:14:43-05:00">
+  <meta itemprop="description" content="Headscale is the open source, self-hosted implementation of Tailscale’s control node. It lets users take advantage of the tailscale client - available on all platforms - and create a mesh network. One of the major advantages of using headscale (and tailscale) is the subnet router and exit node feature. The subnet routing grants access to machines on the same subnet as the connected client. The exit node feature allows us to route traffic through a given node like a traditional VPN. Overall it’s one of the best self-hosting technologies, and the clear choice for remote access to the hackerspace network.">
+  <meta itemprop="datePublished" content="2025-12-08T21:35:59-06:00">
+  <meta itemprop="dateModified" content="2025-12-08T21:35:59-06:00">
+  <meta itemprop="wordCount" content="639">
   <meta itemprop="image" content="http://localhost:1313/">
-  <meta itemprop="keywords" content="Vpn,Networking,Reverse Proxy">
+  <meta itemprop="keywords" content="Vpn,Headscale">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/">
   <meta name="twitter:title" content="Headscale">
-  <meta name="twitter:description" content="Self Hosted Peer-to-Peer VPN">
+  <meta name="twitter:description" content="Headscale is the open source, self-hosted implementation of Tailscale’s control node. It lets users take advantage of the tailscale client - available on all platforms - and create a mesh network. One of the major advantages of using headscale (and tailscale) is the subnet router and exit node feature. The subnet routing grants access to machines on the same subnet as the connected client. The exit node feature allows us to route traffic through a given node like a traditional VPN. Overall it’s one of the best self-hosting technologies, and the clear choice for remote access to the hackerspace network.">
 
 
 
     <meta property="og:url" content="http://localhost:1313/projects/headscale/">
   <meta property="og:site_name" content="SoDak Hackerspace">
   <meta property="og:title" content="Headscale">
-  <meta property="og:description" content="Self Hosted Peer-to-Peer VPN">
+  <meta property="og:description" content="Headscale is the open source, self-hosted implementation of Tailscale’s control node. It lets users take advantage of the tailscale client - available on all platforms - and create a mesh network. One of the major advantages of using headscale (and tailscale) is the subnet router and exit node feature. The subnet routing grants access to machines on the same subnet as the connected client. The exit node feature allows us to route traffic through a given node like a traditional VPN. Overall it’s one of the best self-hosting technologies, and the clear choice for remote access to the hackerspace network.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="projects">
-    <meta property="article:published_time" content="2024-09-18T13:14:43-05:00">
-    <meta property="article:modified_time" content="2024-09-18T13:14:43-05:00">
+    <meta property="article:published_time" content="2025-12-08T21:35:59-06:00">
+    <meta property="article:modified_time" content="2025-12-08T21:35:59-06:00">
     <meta property="article:tag" content="Vpn">
-    <meta property="article:tag" content="Networking">
-    <meta property="article:tag" content="Reverse Proxy">
+    <meta property="article:tag" content="Headscale">
     <meta property="og:image" content="http://localhost:1313/">
 
 
 
 
-    <meta property="article:section" content="infrastrcture" />
-
-    <meta property="article:section" content="networking" />
+    <meta property="article:section" content="infrastructure" />
 
 
 
-    <meta property="article:published_time" content="2024-09-18 13:14:43 -0500 CDT" />
+    <meta property="article:published_time" content="2025-12-08 21:35:59 -0600 CST" />
 
 
 
@@ -141,7 +140,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        0 minutes
+        3 minutes
 
         
       </p>
@@ -153,15 +152,32 @@
       </h1>
 
       
-        <div class="post-excerpt">Self Hosted Peer-to-Peer VPN</div>
-      
 
       
 
       
 
       <div class="post-content">
-        
+        <p><a href="https://headscale.net/stable/">Headscale</a> is the open source, self-hosted implementation of <a href="https://tailscale.com/">Tailscale&rsquo;s</a> control node. It lets users take advantage of the tailscale client - available on all platforms - and create a mesh network. One of the major advantages of using headscale (and tailscale) is the subnet router and exit node feature. The subnet routing grants access to machines on the same subnet as the connected client. The exit node feature allows us to route traffic through a given node like a traditional VPN. Overall it&rsquo;s one of the best self-hosting technologies, and the clear choice for remote access to the hackerspace network.</p>
+<p>Luckily, the <a href="https://community-scripts.github.io/ProxmoxVE/">Proxmox Community Scripts</a> has a script to install headscale in an LXC container. We combine this with <code>ddclient</code> and our virtual WAN bridge port and we have a self-hosted headscale instance for accessing our network. I considered hosting this server in the cloud given it&rsquo;s essential nature to the hackerspace, but keeping costs low and knowing that Proxmox downtime would prevent access to production systems anyway led me to host it on-premises</p>
+<p><a href="https://community-scripts.github.io/ProxmoxVE/scripts?id=headscale">Here&rsquo;s</a> the link to the headscale Proxmox VE helper script. All we have to do is run the command on that page on our <code>blackelk</code> server and configure headscale. We also need to create a DNS entry in our provider so we can actually reach the server. <strong>If your provider has an option to proxy (like CloudFlare does), then that will need to be disabled.</strong></p>
+<p>The <a href="https://headscale.net/stable/setup/requirements/">setup</a> for headscale isn&rsquo;t too painful if you take the time to consider what&rsquo;s necessary to configure, what you can leave alone, and what you&rsquo;d like to customize. Essentially you need a <code>server_url</code>, TLS configuration, and DNS configuration (for <a href="https://en.wikipedia.org/wiki/Split_tunneling">split tunneling</a>).</p>
+<p>All in all this was one of the easier deployments to do (especially since it was one of the first machines deployed and we don&rsquo;t have a reverse proxy for it). There are good resources available online for different configuration setups of headscale. If you&rsquo;d like more information on the hackerspace setup, reach out to <a href="mailto:trashpanda@sodakhacker.space">trashpanda@sodakhacker.space</a> and I&rsquo;d be happy to help or discuss more in depth about why I chose what I did.</p>
+<h3 id="ddclient">ddclient</h3>
+<p>One of the downsides of the network setup for the hackerspace is that any VMs or LXCs deployed with Public IPs result in dynamic public IPs, meaning that over time or after shutdowns that are too long, our public IP will change. Not great for DNS entries which expect the server to keep the same IP. Enter <code>ddclient</code>. <code>ddclient</code> allows for the ability to query your DNS provider every so often (in our case, <strong>5min</strong> but you can set that to be longer or shorter) and match the IP of a system interface. This means that the most amount of downtime we can have on systems is 5min between when an IP changes.</p>
+<p>The key is to minimize the blast radius if the server gets comped and an attacker can read your configuration file and grab that key. Luckily Cloudflare allows for you to create API keys limited by zone. In this case Cloudflare will let you create an API key that limits permissions to the <code>sodakhacker.space</code> zone and ddclient will only look for the configured entry to update. Configure the client to use that key in <code>/etc/ddclient.conf</code> by setting the username to <code>token</code> and then the password to the API key.</p>
+<pre tabindex="0"><code># Configuration file for ddclient generated by debconf
+#
+# /etc/ddclient.conf
+
+protocol=cloudflare \
+use=if, if=eth0 \
+login=token \
+password=&#39;&lt;API-KEY-HERE&gt;&#39; \
+zone=sodakhacker.space \
+fqdn.sodakhacker.space
+</code></pre><p>This will update the DNS entry to <code>fqdn.sodakhacker.space</code> to whatever the IP is of the <code>eth0</code> interface. An attacker with this access could change entries in that zone which admittedly would be really unfortunate, but it wouldn&rsquo;t lead to full compromise of my CloudFlare account which would be far worse. More information on <code>ddclient</code> can be found <a href="https://ddclient.net/">here</a>.</p>
+
       </div>
     </article>
 
@@ -173,8 +189,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
 
         <span class="tag"><a href="http://localhost:1313/tags/vpn/">vpn</a></span>
-        <span class="tag"><a href="http://localhost:1313/tags/networking/">networking</a></span>
-        <span class="tag"><a href="http://localhost:1313/tags/reverse-proxy/">reverse proxy</a></span>
+        <span class="tag"><a href="http://localhost:1313/tags/headscale/">headscale</a></span>
         
     </p>
 
@@ -182,8 +197,7 @@
     <p>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
 
-        <span class="tag"><a href="http://localhost:1313/categories/infrastrcture/">infrastrcture</a></span>
-        <span class="tag"><a href="http://localhost:1313/categories/networking/">networking</a></span>
+        <span class="tag"><a href="http://localhost:1313/categories/infrastructure/">infrastructure</a></span>
         
     </p>
 
@@ -196,7 +210,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        0 Words
+        639 Words
       </p>
 
       <p>
@@ -207,7 +221,7 @@
           <line x1="3" y1="10" x2="21" y2="10"></line>
         </svg>
         
-          2024-09-18 13:14
+          2025-12-08 21:35
         
 
          
@@ -315,18 +329,11 @@
 
         <div class="pagination__buttons">
             
-            <span class="button previous">
-                <a href="http://localhost:1313/projects/network/">
-                    <span class="button__icon">←</span>
-                    <span class="button__text">Networking</span>
-                </a>
-            </span>
-            
 
             
             <span class="button next">
-                <a href="http://localhost:1313/projects/authentik/">
-                    <span class="button__text">Authentik</span>
+                <a href="http://localhost:1313/projects/vm-template/">
+                    <span class="button__text">Building a Virtual Machine Template</span>
                     <span class="button__icon">→</span>
                 </a>
             </span>
