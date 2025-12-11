@@ -6,8 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="trashpana">
-<meta name="description" content="Overview Creating a VM template for our Proxmox server is a good idea for many reasons including: installing tools, disabling unnecessary services, configuration of default services, speed of deployment, etc. The list goes on and on. All of these reasons can really be summed up in one overarching reason and that&rsquo;s minimizing configuration drift. Having a baseline template reduces the time spent on troubleshooting and makes it easier to configure automation tooling like Ansible in the future. In this post, I&rsquo;ll give a little bit of a detailed walkthrough for how I like to setup a Debian template. I&rsquo;ll make a few more templates as well, most notably Rocky Linux to have a RHEL flavor in our environment which will be important for the FreeIPA project. But I&rsquo;ll choose Debian because it will be the defacto distribution of choice for the hackerspace.
-" />
+<meta name="description" content="For Faster VM Deployment" />
 <meta name="keywords" content=", debian, virtualization" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -39,7 +38,7 @@
 
 
   <meta itemprop="name" content="Building a Virtual Machine Template">
-  <meta itemprop="description" content="Overview Creating a VM template for our Proxmox server is a good idea for many reasons including: installing tools, disabling unnecessary services, configuration of default services, speed of deployment, etc. The list goes on and on. All of these reasons can really be summed up in one overarching reason and that’s minimizing configuration drift. Having a baseline template reduces the time spent on troubleshooting and makes it easier to configure automation tooling like Ansible in the future. In this post, I’ll give a little bit of a detailed walkthrough for how I like to setup a Debian template. I’ll make a few more templates as well, most notably Rocky Linux to have a RHEL flavor in our environment which will be important for the FreeIPA project. But I’ll choose Debian because it will be the defacto distribution of choice for the hackerspace.">
+  <meta itemprop="description" content="For Faster VM Deployment">
   <meta itemprop="datePublished" content="2025-11-20T13:04:14-06:00">
   <meta itemprop="dateModified" content="2025-11-20T13:04:14-06:00">
   <meta itemprop="wordCount" content="1314">
@@ -49,14 +48,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/debian.png">
   <meta name="twitter:title" content="Building a Virtual Machine Template">
-  <meta name="twitter:description" content="Overview Creating a VM template for our Proxmox server is a good idea for many reasons including: installing tools, disabling unnecessary services, configuration of default services, speed of deployment, etc. The list goes on and on. All of these reasons can really be summed up in one overarching reason and that’s minimizing configuration drift. Having a baseline template reduces the time spent on troubleshooting and makes it easier to configure automation tooling like Ansible in the future. In this post, I’ll give a little bit of a detailed walkthrough for how I like to setup a Debian template. I’ll make a few more templates as well, most notably Rocky Linux to have a RHEL flavor in our environment which will be important for the FreeIPA project. But I’ll choose Debian because it will be the defacto distribution of choice for the hackerspace.">
+  <meta name="twitter:description" content="For Faster VM Deployment">
 
 
 
     <meta property="og:url" content="http://localhost:1313/projects/vm-template/">
   <meta property="og:site_name" content="SoDak Hackerspace">
   <meta property="og:title" content="Building a Virtual Machine Template">
-  <meta property="og:description" content="Overview Creating a VM template for our Proxmox server is a good idea for many reasons including: installing tools, disabling unnecessary services, configuration of default services, speed of deployment, etc. The list goes on and on. All of these reasons can really be summed up in one overarching reason and that’s minimizing configuration drift. Having a baseline template reduces the time spent on troubleshooting and makes it easier to configure automation tooling like Ansible in the future. In this post, I’ll give a little bit of a detailed walkthrough for how I like to setup a Debian template. I’ll make a few more templates as well, most notably Rocky Linux to have a RHEL flavor in our environment which will be important for the FreeIPA project. But I’ll choose Debian because it will be the defacto distribution of choice for the hackerspace.">
+  <meta property="og:description" content="For Faster VM Deployment">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="projects">
@@ -151,6 +150,8 @@
         <a href="http://localhost:1313/projects/vm-template/">Building a Virtual Machine Template</a>
       </h1>
 
+      
+        <div class="post-excerpt">For Faster VM Deployment</div>
       
 
       

@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 08 Dec 2025 21:35:59 -0600</lastBuildDate>
+    <lastBuildDate>Wed, 10 Dec 2025 09:04:37 -0600</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/infrastructure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blackelk2</title>
+      <link>http://localhost:1313/projects/blackelk2/</link>
+      <pubDate>Wed, 10 Dec 2025 09:04:37 -0600</pubDate>
+      <guid>http://localhost:1313/projects/blackelk2/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://sodakhacker.space/projects/proxmox/&#34;&gt;In a previous post&lt;/a&gt; I discussed the installation of our main proxmox node, blackelk. The original hackerspace server was a beefy laptop I had lying around. I managed to get a new proper rackmount server a few months back, an HP Proliant DL360 G7. This server offers a significant boost in resources to the hackerspace and as such resulted in the decommission of the old laptop server and a fresh install of Proxmox for the hackerspace.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Headscale</title>
       <link>http://localhost:1313/projects/headscale/</link>

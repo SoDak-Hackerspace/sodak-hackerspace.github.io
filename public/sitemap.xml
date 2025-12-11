@@ -2,22 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/projects/blackelk2/</loc>
+    <lastmod>2025-12-10T09:04:37-06:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2025-12-08T21:35:59-06:00</lastmod>
+    <lastmod>2025-12-10T09:04:37-06:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/infrastructure/</loc>
+    <lastmod>2025-12-10T09:04:37-06:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/proxmox/</loc>
+    <lastmod>2025-12-10T09:04:37-06:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-12-10T09:04:37-06:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2025-12-10T09:04:37-06:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/virtualization/</loc>
+    <lastmod>2025-12-10T09:04:37-06:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/projects/headscale/</loc>
     <lastmod>2025-12-08T21:35:59-06:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/headscale/</loc>
-    <lastmod>2025-12-08T21:35:59-06:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/infrastructure/</loc>
-    <lastmod>2025-12-08T21:35:59-06:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2025-12-08T21:35:59-06:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-12-08T21:35:59-06:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/vpn/</loc>
@@ -29,13 +38,7 @@
     <loc>http://localhost:1313/tags/debian/</loc>
     <lastmod>2025-11-20T13:04:14-06:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/virtualization/</loc>
-    <lastmod>2025-11-20T13:04:14-06:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/projects/proxmox/</loc>
-    <lastmod>2024-06-23T17:00:50-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/proxmox/</loc>
     <lastmod>2024-06-23T17:00:50-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/members/</loc>
