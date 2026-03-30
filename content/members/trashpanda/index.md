@@ -2,7 +2,7 @@
 title: "trashpanda"
 date: 2024-06-21
 role: "Founding Member"
-image: "trashpanda_logo.jpg"
+image: "trashpanda_logoV10.png"
 socials:
  - name: "github"
    url: "https://github.com/mcculleytech"
